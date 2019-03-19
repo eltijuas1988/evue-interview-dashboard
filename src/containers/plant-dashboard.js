@@ -4,7 +4,8 @@ import { setInterval } from 'core-js';
 const machineStyle = {
   width: 100,
   height: 100,
-  border: "2px black solid",
+  padding: 10,
+  backgroundColor: "black",
   margin: 5,
 }
 
@@ -45,9 +46,16 @@ class PlantDashboard extends React.PureComponent {
 
     return plantMachines.map(machine => {
       const {id, name, efficiency} = machine
+      let color = "red"
+      if (efficiency >= 80) {
+        color = "green"
+      } else if (efficiency > 60 && efficiency < 80) {
+        color = "yellow"
+      }
+
       const styles = {
         ...machineStyle,
-        color: efficiency < 60 ? "red" : "green"
+        color,
       }
 
       return (
