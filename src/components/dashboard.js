@@ -1,8 +1,9 @@
 import * as React from 'react'
+import {PlantDashboard} from '../containers'
 
 const Dashboard = () => {
   return (
-    <div>Dashboard Goes here</div>
+    <div><PlantDashboard/></div>
   )
 }
 
