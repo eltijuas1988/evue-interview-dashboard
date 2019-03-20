@@ -45,7 +45,7 @@ class PlantDashboard extends React.PureComponent {
     const {plantMachines} = this.state
 
     return plantMachines.map(machine => {
-      const {id, name, efficiency} = machine
+      const {id, name, efficiency, fault} = machine
       let color = "red"
       if (efficiency >= 80) {
         color = "green"
@@ -63,6 +63,7 @@ class PlantDashboard extends React.PureComponent {
           <div>{id}</div>
           <div>{name}</div>
           <div>{efficiency}</div>
+          <div>{`${fault}`}</div>
         </div>
       )
     })
