@@ -4,12 +4,14 @@ class PlantMachine {
   }
 
   machineReducer(machine) {
+    const {id, name, efficiency, fault, idle} = machine
+
     const reducedMachine = {
-      id: machine.id,
-      name: machine.name,
-      efficiency: machine.efficiency,
-      fault: machine.fault,
-      idle: machine.idle,
+      id,
+      name,
+      efficiency,
+      fault,
+      idle,
     }
 
     return reducedMachine
