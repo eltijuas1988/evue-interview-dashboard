@@ -1,5 +1,6 @@
 import * as React from 'react'
-import { setInterval } from 'core-js';
+import {setInterval} from 'core-js'
+import {connect} from 'react-redux'
 
 const machineStyle = {
   width: 100,
@@ -70,6 +71,7 @@ class PlantDashboard extends React.PureComponent {
   }
 
   render() {
+    console.log(this.props.areas)
     return (
       <div>
         <div>PlantDashboard</div>
@@ -79,4 +81,10 @@ class PlantDashboard extends React.PureComponent {
   }
 }
 
-export default PlantDashboard
+const mapStateToProps = (state, ownProps) => {
+  const {areas} = state
+
+  return {areas}
+}
+
+export default connect(mapStateToProps)(PlantDashboard)
