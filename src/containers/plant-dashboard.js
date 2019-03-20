@@ -1,6 +1,8 @@
 import * as React from 'react'
 import {setInterval} from 'core-js'
 import {connect} from 'react-redux'
+import {bindActionCreators} from 'redux'
+import * as areaActions from '../actions/areas'
 
 const machineStyle = {
   width: 100,
@@ -11,13 +13,6 @@ const machineStyle = {
 }
 
 class PlantDashboard extends React.PureComponent {
-  constructor(props) {
-    super(props)
-    this.state = {
-      plantMachines: []
-    }
-  }
-
   componentDidMount() {
     this.timer = setInterval(() => this.getPlantData(), 5000)
   }
@@ -27,25 +22,25 @@ class PlantDashboard extends React.PureComponent {
     this.timer = null
   }
 
-  storeData(data) {
-    if (data && data.areas) {
-      this.setState({
-        plantMachines: data.areas
-      })
+  storeData({data}) {
+    if (data) {
+      const {getMachineUpdates} = this.props.actions
+      getMachineUpdates({data})
     }
   }
 
   getPlantData() {
     fetch("http://demo.etechsystems.com/interview_problem_data.json")
       .then(res => res.json())
-      .then(response => this.storeData(response))
+      .then(response => this.storeData({data: response.areas}))
       .catch(error => console.log(error))
   }
 
   renderPlantMachines() {
-    const {plantMachines} = this.state
+    const {areas} = this.props.areas
+    if (!areas) return null
 
-    return plantMachines.map(machine => {
+    return areas.map(machine => {
       const {id, name, efficiency, fault} = machine
       let color = "red"
       if (efficiency >= 80) {
@@ -71,7 +66,6 @@ class PlantDashboard extends React.PureComponent {
   }
 
   render() {
-    console.log(this.props.areas)
     return (
       <div>
         <div>PlantDashboard</div>
@@ -87,4 +81,14 @@ const mapStateToProps = (state, ownProps) => {
   return {areas}
 }
 
-export default connect(mapStateToProps)(PlantDashboard)
+const mapDispatchToProps = (dispatch) => {
+  const actions = bindActionCreators(areaActions, dispatch)
+
+  return {
+    actions,
+  }
+}
+
+export default connect(
+  mapStateToProps, mapDispatchToProps
+)(PlantDashboard)
