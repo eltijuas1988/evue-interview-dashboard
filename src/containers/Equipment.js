@@ -17,8 +17,8 @@ class Equipment extends React.PureComponent {
 
   storeData({data}) {
     if (data) {
-      const {getMachineUpdates} = this.props.actions
-      getMachineUpdates({data})
+      const {updatePlantData} = this.props.actions
+      updatePlantData({data})
     }
   }
 
@@ -33,10 +33,10 @@ class Equipment extends React.PureComponent {
     const {children, areas} = this.props
 
     return (
-      <div>
+      <React.Fragment>
         <div>Equipment Dashboard</div>
         {renderChildrenWithProps({children, props: areas})}
-      </div>
+      </React.Fragment>
     )
   }
 }

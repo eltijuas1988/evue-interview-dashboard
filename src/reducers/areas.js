@@ -1,4 +1,4 @@
-import {GET_MACHINE_UPDATES} from '../actions/actionTypes'
+import {UPDATE_PLANT_DATA} from '../actions/actionTypes'
 
 const initialState = {
   areas: [],
@@ -6,15 +6,15 @@ const initialState = {
 
 const areas = (state = initialState, action) => {
   switch(action.type) {
-    case GET_MACHINE_UPDATES:
-      return getMachineUpdates({state, action})
+    case UPDATE_PLANT_DATA:
+      return updatePlantData({state, action})
 
     default:
       return state
   }
 }
 
-const getMachineUpdates = ({state, action}) => {
+const updatePlantData = ({state, action}) => {
   return {
     areas: action.payload
   }

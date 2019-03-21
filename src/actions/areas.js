@@ -1,8 +1,8 @@
-import {GET_MACHINE_UPDATES} from './actionTypes'
+import {UPDATE_PLANT_DATA} from './actionTypes'
 
-export function getMachineUpdates({data}) {
+export function updatePlantData({data}) {
   return {
-    type: GET_MACHINE_UPDATES,
+    type: UPDATE_PLANT_DATA,
     payload: data,
   }
 }
