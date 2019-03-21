@@ -3,14 +3,7 @@ import {setInterval} from 'core-js'
 import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import * as areaActions from '../actions/areas'
-
-const equipmentStyle = {
-  width: 100,
-  height: 100,
-  padding: 10,
-  backgroundColor: "black",
-  margin: 5,
-}
+import {renderChildrenWithProps} from './utils'
 
 class Equipment extends React.PureComponent {
   componentDidMount() {
@@ -36,52 +29,25 @@ class Equipment extends React.PureComponent {
       .catch(error => console.log(error))
   }
 
-  renderEquipment() {
-    const {areas} = this.props.areas
-    if (!areas) return null
-
-    return areas.map(machine => {
-      const {id, name, efficiency, fault} = machine
-      let color = "red"
-      if (efficiency >= 80) {
-        color = "green"
-      } else if (efficiency > 60 && efficiency < 80) {
-        color = "yellow"
-      }
-
-      const styles = {
-        ...equipmentStyle,
-        color,
-      }
-
-      return (
-        <div key={id} style={styles}>
-          <div>{id}</div>
-          <div>{name}</div>
-          <div>{efficiency}</div>
-          <div>{`${fault}`}</div>
-        </div>
-      )
-    })
-  }
-
   render() {
+    const {children, areas} = this.props
+
     return (
       <div>
         <div>Equipment Dashboard</div>
-        {this.renderEquipment()}
+        {renderChildrenWithProps({children, props: areas})}
       </div>
     )
   }
 }
 
-const mapStateToProps = (state, ownProps) => {
+const mapStateToProps = state => {
   const {areas} = state
 
   return {areas}
 }
 
-const mapDispatchToProps = (dispatch) => {
+const mapDispatchToProps = dispatch => {
   const actions = bindActionCreators(areaActions, dispatch)
 
   return {
