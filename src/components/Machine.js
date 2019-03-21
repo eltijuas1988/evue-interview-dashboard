@@ -1,18 +1,53 @@
 import * as React from 'react'
 import injectSheet from 'react-jss'
+import Dialog from '@material-ui/core/Dialog'
+import DialogTitle from '@material-ui/core/DialogTitle'
 import {TEAL} from '../constants'
 
-const Machine = (props) => {
-  const {classes, id, name, efficiency, fault} = props
+class Machine extends React.PureComponent {
+  constructor(props) {
+    super(props)
 
-  return (
-    <div className={classes.root}>
-      <div>{id}</div>
-      <div>{name}</div>
-      <div>{efficiency}</div>
-      <div>{`${fault}`}</div>
-    </div>
-  )
+    this.state = {
+      showDetails: false,
+    }
+  }
+
+  handleClose() {
+    this.setState({
+      showDetails: false,
+    })
+  }
+
+  handleClick() {
+    this.setState({
+      showDetails: true
+    })
+  }
+
+  render() {
+    const {classes, id, name, efficiency, fault} = this.props
+
+    return (
+      <React.Fragment>
+        <div className={classes.root} onClick={() => this.handleClick()}>
+          <div>{id}</div>
+          <div>{name}</div>
+          <div>{efficiency}</div>
+          <div>{`${fault}`}</div>
+        </div>
+
+        <Dialog
+          onClose={() => this.handleClose()}
+          aria-labelledby="simple-dialog-title"
+          open={this.state.showDetails}
+        >
+          <DialogTitle id="simple-dialog-title">Machine Details</DialogTitle>
+          <div>My Machine Details Will Go Here</div>
+        </Dialog>
+      </React.Fragment>
+    )
+  }
 }
 
 const determineEfficiencyColor = ({efficiency}) => {
@@ -42,6 +77,7 @@ const styles = {
     flexDirection: "column",
     textAlign: "center",
     justifyContent: "center",
+    cursor: "pointer",
   },
 }
 
