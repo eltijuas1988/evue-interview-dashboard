@@ -4,7 +4,7 @@ const AreaList = ({areas}) => {
   if (!areas) return null
 
   return areas.map(machine => {
-    const {id, name, efficiency, fault} = machine
+    const {id, name, efficiency, fault, type} = machine
     let color = "red"
 
     if (efficiency >= 80) {
@@ -25,6 +25,7 @@ const AreaList = ({areas}) => {
         <div>{name}</div>
         <div>{efficiency}</div>
         <div>{`${fault}`}</div>
+        <div>{type}</div>
       </div>
     )
   })
