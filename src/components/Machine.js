@@ -26,15 +26,13 @@ class Machine extends React.PureComponent {
   }
 
   render() {
-    const {classes, id, name, efficiency, fault} = this.props
+    const {classes, id, name, efficiency, fault, type} = this.props
 
     return (
       <React.Fragment>
         <div className={classes.root} onClick={() => this.handleClick()}>
-          <div>{id}</div>
           <div>{name}</div>
           <div>{efficiency}</div>
-          <div>{`${fault}`}</div>
         </div>
 
         <Dialog
@@ -42,8 +40,17 @@ class Machine extends React.PureComponent {
           aria-labelledby="simple-dialog-title"
           open={this.state.showDetails}
         >
-          <DialogTitle id="simple-dialog-title">Machine Details</DialogTitle>
-          <div>My Machine Details Will Go Here</div>
+          <div className={classes.dialog}>
+            <DialogTitle id="simple-dialog-title" className={classes.dialogTitle}>
+              {name}
+            </DialogTitle>
+            <div className={classes.dialogContent}>
+              <div>{id}</div>
+              <div>{efficiency}</div>
+              <div>{`${fault}`}</div>
+              <div>{type}</div>
+            </div>
+          </div>
         </Dialog>
       </React.Fragment>
     )
@@ -78,6 +85,18 @@ const styles = {
     textAlign: "center",
     justifyContent: "center",
     cursor: "pointer",
+  },
+  dialog: {
+    padding: 20,
+  },
+  dialogTitle: {
+    padding: 0,
+  },
+  dialogContent: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    textAlign: "center",
   },
 }
 
