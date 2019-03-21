@@ -27,11 +27,14 @@ class Equipment extends React.PureComponent {
 
   render() {
     const {children, areas} = this.props
+    const props = {
+      machines: areas.areas
+    }
 
     return (
       <React.Fragment>
         <div>Equipment Dashboard</div>
-        {renderChildrenWithProps({children, props: areas})}
+        {renderChildrenWithProps({children, props})}
       </React.Fragment>
     )
   }
