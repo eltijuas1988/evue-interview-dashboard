@@ -1,5 +1,6 @@
 import * as React from 'react'
 import injectSheet from 'react-jss'
+import {TEAL} from '../constants'
 import Machine from './Machine'
 
 const AreaList = ({classes, title, machines, type}) => {
@@ -7,7 +8,7 @@ const AreaList = ({classes, title, machines, type}) => {
 
   return (
     <div className={classes.root}>
-      <div>{title}</div>
+      <div className={classes.title}>{title}</div>
       <div className={classes.area}>
         {machines.filter(m => m.type === type).map(machine => {
           return <Machine key={machine.id} {...machine}/>
@@ -20,6 +21,10 @@ const AreaList = ({classes, title, machines, type}) => {
 const styles = {
   root: {
     minHeight: 200,
+  },
+  title: {
+    fontSize: 25,
+    color: TEAL,
   },
   area: {
     display: 'flex',
