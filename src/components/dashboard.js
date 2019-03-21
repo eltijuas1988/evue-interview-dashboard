@@ -1,6 +1,6 @@
 import * as React from 'react'
 import {Provider} from 'react-redux'
-import {PlantDashboard} from '../containers'
+import {Equipment} from '../containers'
 import configureStore from '../store'
 
 const Dashboard = () => {
@@ -9,7 +9,7 @@ const Dashboard = () => {
   return (
     <div>
       <Provider store={store}>
-        <PlantDashboard/>
+        <Equipment/>
       </Provider>
     </div>
   )

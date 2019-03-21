@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {bindActionCreators} from 'redux'
 import * as areaActions from '../actions/areas'
 
-const machineStyle = {
+const equipmentStyle = {
   width: 100,
   height: 100,
   padding: 10,
@@ -12,7 +12,7 @@ const machineStyle = {
   margin: 5,
 }
 
-class PlantDashboard extends React.PureComponent {
+class Equipment extends React.PureComponent {
   componentDidMount() {
     this.timer = setInterval(() => this.getPlantData(), 5000)
   }
@@ -36,7 +36,7 @@ class PlantDashboard extends React.PureComponent {
       .catch(error => console.log(error))
   }
 
-  renderPlantMachines() {
+  renderEquipment() {
     const {areas} = this.props.areas
     if (!areas) return null
 
@@ -50,7 +50,7 @@ class PlantDashboard extends React.PureComponent {
       }
 
       const styles = {
-        ...machineStyle,
+        ...equipmentStyle,
         color,
       }
 
@@ -68,8 +68,8 @@ class PlantDashboard extends React.PureComponent {
   render() {
     return (
       <div>
-        <div>PlantDashboard</div>
-        {this.renderPlantMachines()}
+        <div>Equipment Dashboard</div>
+        {this.renderEquipment()}
       </div>
     )
   }
@@ -91,4 +91,4 @@ const mapDispatchToProps = (dispatch) => {
 
 export default connect(
   mapStateToProps, mapDispatchToProps
-)(PlantDashboard)
+)(Equipment)
