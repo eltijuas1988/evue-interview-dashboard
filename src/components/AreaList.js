@@ -1,13 +1,14 @@
 import * as React from 'react'
+import injectSheet from 'react-jss'
 import Machine from './Machine'
 
-const AreaList = ({title, machines, type}) => {
+const AreaList = ({classes, title, machines, type}) => {
   if (!machines) return null
 
   return (
-    <div>
+    <div className={classes.root}>
       <div>{title}</div>
-      <div style={mainStyles}>
+      <div className={classes.area}>
         {machines.filter(m => m.type === type).map(machine => {
           return <Machine key={machine.id} {...machine}/>
         })}
@@ -16,8 +17,13 @@ const AreaList = ({title, machines, type}) => {
   )
 }
 
-const mainStyles = {
-  display: 'flex',
+const styles = {
+  root: {
+    minHeight: 200,
+  },
+  area: {
+    display: 'flex',
+  },
 }
 
-export default AreaList
+export default injectSheet(styles)(AreaList)

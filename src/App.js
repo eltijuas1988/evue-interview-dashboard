@@ -1,15 +1,27 @@
-import React, { Component } from 'react'
-import './App.css'
-import {Dashboard} from './components'
+import React from 'react'
+import injectSheet from 'react-jss'
+import {Header, Dashboard} from './components'
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
+const App = ({classes}) => {
+  return (
+    <React.Fragment>
+      <div className={classes.header}>
+        <Header/>
+      </div>
+      <div className={classes.dashboard}>
         <Dashboard/>
       </div>
-    );
-  }
+    </React.Fragment>
+  )
 }
 
-export default App;
+const styles = {
+  header: {
+    paddingTop: 25,
+  },
+  dashboard: {
+    padding: 25,
+  },
+}
+
+export default injectSheet(styles)(App)
