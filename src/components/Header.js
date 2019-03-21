@@ -1,7 +1,7 @@
 import * as React from 'react'
 import injectSheet from 'react-jss'
 import logo from '../logo.png'
-import {FLAT_GREEN} from '../constants'
+import {TEAL} from '../constants'
 
 const Header = ({classes}) => {
   return (
@@ -13,7 +13,7 @@ const Header = ({classes}) => {
 
 const styles = {
   root: {
-    backgroundColor: FLAT_GREEN,
+    backgroundColor: TEAL,
     padding: [15, 25, 15, 25],
   },
   logo: {
