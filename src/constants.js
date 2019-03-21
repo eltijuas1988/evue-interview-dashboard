@@ -1,1 +1,2 @@
-export const FLAT_GREEN = "#3C7880"
+export const TEAL = "#3C7880"
+export const DARK_PURPLE = "#080513"
