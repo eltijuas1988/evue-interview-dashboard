@@ -1,5 +1,5 @@
 import {UPDATE_PLANT_DATA} from '../actions/actionTypes'
-import {BlanketFolder, Ironer, Machine, Sorter, Washer} from '../datasources'
+import {BlanketFolder, Ironer, Machine, Sorter, Washer} from '../models'
 
 const initialState = {
   areas: [],
