@@ -6,9 +6,7 @@ import {DARK_PURPLE} from './constants'
 const App = ({classes}) => {
   return (
     <div className={classes.root}>
-      <div className={classes.header}>
-        <Header/>
-      </div>
+      <Header/>
       <div className={classes.dashboard}>
         <Dashboard/>
       </div>
@@ -19,9 +17,6 @@ const App = ({classes}) => {
 const styles = {
   root: {
     backgroundColor: DARK_PURPLE,
-  },
-  header: {
-    paddingTop: 25,
   },
   dashboard: {
     padding: 25,
