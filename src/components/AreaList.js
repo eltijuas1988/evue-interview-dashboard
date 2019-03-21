@@ -1,42 +1,23 @@
 import * as React from 'react'
+import Machine from './Machine'
 
-const AreaList = ({areas}) => {
-  if (!areas) return null
+const AreaList = ({title, machines, type}) => {
+  if (!machines) return null
 
-  return areas.map(machine => {
-    const {id, name, efficiency, fault, type} = machine
-    let color = "red"
-
-    if (efficiency >= 80) {
-      color = "green"
-
-    } else if (efficiency > 60 && efficiency < 80) {
-      color = "yellow"
-    }
-
-    const styles = {
-      ...equipmentStyle,
-      color,
-    }
-
-    return (
-      <div key={id} style={styles}>
-        <div>{id}</div>
-        <div>{name}</div>
-        <div>{efficiency}</div>
-        <div>{`${fault}`}</div>
-        <div>{type}</div>
+  return (
+    <div>
+      <div>{title}</div>
+      <div style={mainStyles}>
+        {machines.filter(m => m.type === type).map(machine => {
+          return <Machine key={machine.id} {...machine}/>
+        })}
       </div>
-    )
-  })
+    </div>
+  )
 }
 
-const equipmentStyle = {
-  width: 100,
-  height: 100,
-  padding: 10,
-  backgroundColor: "black",
-  margin: 5,
+const mainStyles = {
+  display: 'flex',
 }
 
 export default AreaList
