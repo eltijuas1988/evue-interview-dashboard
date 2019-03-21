@@ -1,7 +1,21 @@
 import * as React from 'react'
+import injectSheet from 'react-jss'
+import {TEAL} from '../constants'
 
 const Machine = (props) => {
-  const {id, name, efficiency, fault, type} = props
+  const {classes, id, name, efficiency, fault} = props
+
+  return (
+    <div className={classes.root}>
+      <div>{id}</div>
+      <div>{name}</div>
+      <div>{efficiency}</div>
+      <div>{`${fault}`}</div>
+    </div>
+  )
+}
+
+const determineEfficiencyColor = ({efficiency}) => {
   let color = "red"
 
   if (efficiency >= 80) {
@@ -11,28 +25,24 @@ const Machine = (props) => {
     color = "yellow"
   }
 
-  const styles = {
-    ...equipmentStyle,
-    color,
-  }
-
-  return (
-    <div key={id} style={styles}>
-      <div>{id}</div>
-      <div>{name}</div>
-      <div>{efficiency}</div>
-      <div>{`${fault}`}</div>
-      <div>{type}</div>
-    </div>
-  )
+  return color
 }
 
-const equipmentStyle = {
-  width: 100,
-  height: 100,
-  padding: 10,
-  backgroundColor: "black",
-  margin: 5,
+const styles = {
+  root: {
+    width: 100,
+    height: 100,
+    padding: 10,
+    color: props => determineEfficiencyColor({efficiency: props.efficiency}),
+    backgroundColor: "black",
+    border: ["2px", "solid", TEAL],
+    borderRadius: 5,
+    margin: 5,
+    display: "flex",
+    flexDirection: "column",
+    textAlign: "center",
+    justifyContent: "center",
+  },
 }
 
-export default Machine
+export default injectSheet(styles)(Machine)

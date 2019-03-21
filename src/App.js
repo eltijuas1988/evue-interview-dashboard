@@ -1,15 +1,26 @@
-import React, { Component } from 'react'
-import './App.css'
-import {Dashboard} from './components'
+import React from 'react'
+import injectSheet from 'react-jss'
+import {Header, Dashboard} from './components'
+import {DARK_PURPLE} from './constants'
 
-class App extends Component {
-  render() {
-    return (
-      <div className="App">
+const App = ({classes}) => {
+  return (
+    <div className={classes.root}>
+      <Header/>
+      <div className={classes.dashboard}>
         <Dashboard/>
       </div>
-    );
-  }
+    </div>
+  )
 }
 
-export default App;
+const styles = {
+  root: {
+    backgroundColor: DARK_PURPLE,
+  },
+  dashboard: {
+    padding: 25,
+  },
+}
+
+export default injectSheet(styles)(App)

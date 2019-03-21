@@ -33,7 +33,6 @@ class Equipment extends React.PureComponent {
 
     return (
       <React.Fragment>
-        <div>Equipment Dashboard</div>
         {renderChildrenWithProps({children, props})}
       </React.Fragment>
     )
