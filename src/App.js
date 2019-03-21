@@ -1,21 +1,25 @@
 import React from 'react'
 import injectSheet from 'react-jss'
 import {Header, Dashboard} from './components'
+import {DARK_PURPLE} from './constants'
 
 const App = ({classes}) => {
   return (
-    <React.Fragment>
+    <div className={classes.root}>
       <div className={classes.header}>
         <Header/>
       </div>
       <div className={classes.dashboard}>
         <Dashboard/>
       </div>
-    </React.Fragment>
+    </div>
   )
 }
 
 const styles = {
+  root: {
+    backgroundColor: DARK_PURPLE,
+  },
   header: {
     paddingTop: 25,
   },
