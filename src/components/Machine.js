@@ -1,8 +1,9 @@
 import * as React from 'react'
 import injectSheet from 'react-jss'
+import {TEAL} from '../constants'
 
 const Machine = (props) => {
-  const {classes, id, name, efficiency, fault, type} = props
+  const {classes, id, name, efficiency, fault} = props
 
   return (
     <div className={classes.root}>
@@ -10,7 +11,6 @@ const Machine = (props) => {
       <div>{name}</div>
       <div>{efficiency}</div>
       <div>{`${fault}`}</div>
-      <div>{type}</div>
     </div>
   )
 }
@@ -35,7 +35,13 @@ const styles = {
     padding: 10,
     color: props => determineEfficiencyColor({efficiency: props.efficiency}),
     backgroundColor: "black",
+    border: ["2px", "solid", TEAL],
+    borderRadius: 5,
     margin: 5,
+    display: "flex",
+    flexDirection: "column",
+    textAlign: "center",
+    justifyContent: "center",
   },
 }
 
