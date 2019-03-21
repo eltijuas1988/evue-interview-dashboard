@@ -6,3 +6,12 @@ export function updatePlantData({data}) {
     payload: data,
   }
 }
+
+export function fetchPlantData() {
+  return dispatch => {
+    fetch("http://demo.etechsystems.com/interview_problem_data.json")
+      .then(res => res.json())
+      .then(response => dispatch(updatePlantData({data: response.areas})))
+      .catch(error => console.log(error))
+  }
+}

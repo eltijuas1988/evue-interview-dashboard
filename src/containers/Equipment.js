@@ -7,7 +7,9 @@ import {renderChildrenWithProps} from './utils'
 
 class Equipment extends React.PureComponent {
   componentDidMount() {
-    this.timer = setInterval(() => this.getPlantData(), 5000)
+    const {fetchPlantData} = this.props.actions
+
+    this.timer = setInterval(() => fetchPlantData(), 5000)
   }
 
   componentWillUnmount() {
@@ -18,15 +20,9 @@ class Equipment extends React.PureComponent {
   storeData({data}) {
     if (data) {
       const {updatePlantData} = this.props.actions
+
       updatePlantData({data})
     }
-  }
-
-  getPlantData() {
-    fetch("http://demo.etechsystems.com/interview_problem_data.json")
-      .then(res => res.json())
-      .then(response => this.storeData({data: response.areas}))
-      .catch(error => console.log(error))
   }
 
   render() {
