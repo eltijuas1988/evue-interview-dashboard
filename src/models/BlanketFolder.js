@@ -4,7 +4,7 @@ class BlanketFolder extends Machine {
   constructor(props) {
     super(props)
 
-    this.type = "blanket folder"
+    this.type = "blanket-folder"
   }
 }
 
