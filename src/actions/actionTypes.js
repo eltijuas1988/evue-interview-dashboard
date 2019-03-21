@@ -1,0 +1,1 @@
+export const UPDATE_PLANT_DATA = 'UPDATE_PLANT_DATA'

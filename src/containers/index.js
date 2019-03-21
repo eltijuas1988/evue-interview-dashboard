@@ -1,1 +1,1 @@
-export {default as PlantDashboard} from './plant-dashboard'
+export {default as Equipment} from './Equipment'

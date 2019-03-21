@@ -1,0 +1,5 @@
+export {default as BlanketFolder} from './BlanketFolder'
+export {default as Ironer} from './Ironer'
+export {default as Machine} from './Machine'
+export {default as Sorter} from './Sorter'
+export {default as Washer} from './Washer'
