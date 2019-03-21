@@ -11,7 +11,10 @@ const Dashboard = () => {
     <div>
       <Provider store={store}>
         <Equipment>
-          <AreaList/>
+          <AreaList title="Washers" type="washer"/>
+          <AreaList title="Blanket Folders" type="blanket-folder"/>
+          <AreaList title="Ironers" type="ironer"/>
+          <AreaList title="Sorters" type="sorter"/>
         </Equipment>
       </Provider>
     </div>
