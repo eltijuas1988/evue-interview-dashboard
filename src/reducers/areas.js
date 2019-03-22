@@ -1,9 +1,10 @@
+import produce from 'immer'
 import {UPDATE_PLANT_DATA} from '../actions/actionTypes'
 import {buildDatasourceFromData} from './utils'
 
 const initialState = {
   groupedByArray: undefined,
-  groupedByIds: undefined,
+  groupedByIds: {},
 }
 
 const areas = (state = initialState, action) => {
@@ -17,37 +18,40 @@ const areas = (state = initialState, action) => {
 }
 
 const updatePlantData = ({state, action}) => {
-  const instantiatedObjects = action.payload.map(machine => {
+  let newState = produce(state, draftState => draftState)
+
+  action.payload.forEach(machine => {
     const instaObject = buildDatasourceFromData(machine)
     const {id} = instaObject
 
-    if (state.groupedByIds === undefined) {
-      state.groupedByIds = {[id]: instaObject}
+    const previousMachineState = newState.groupedByIds[id]
 
-    } else {
-      const oldMachine = state.groupedByIds[id]
-      if (oldMachine) {
-        const mergedObject = {
-          ...oldMachine,
-          efficiency: instaObject.efficiency,
-          idle: instaObject.idle,
-          fault: instaObject.fault,
-        }
-
-        state.groupedByIds[id] = mergedObject
-      } else {
-        state.groupedByIds[id] = instaObject
+    if (previousMachineState) {
+      const mergedObject = {
+        ...previousMachineState,
+        efficiency: instaObject.efficiency,
+        idle: instaObject.idle,
+        fault: instaObject.fault,
       }
-    }
 
-    return instaObject
+      newState = produce(newState, draftState => {
+        draftState.groupedByIds[id] = mergedObject
+      })
+    } else {
+      newState = produce(newState, draftState => {
+        draftState.groupedByIds[id] = instaObject
+      })
+    }
   })
 
-  console.log(state.groupedByIds)
+  newState = produce(newState, draftState => {
+    const arrayFromObject = Object.values(newState.groupedByIds)
 
-  return {
-    groupedByArray: instantiatedObjects,
-  }
+    draftState.groupedByArray =
+      arrayFromObject && arrayFromObject.length ? arrayFromObject : []
+  })
+
+  return newState
 }
 
 export default areas
