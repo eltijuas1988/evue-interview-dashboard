@@ -2,6 +2,7 @@ import * as React from 'react'
 import injectSheet from 'react-jss'
 import Dialog from '@material-ui/core/Dialog'
 import DialogTitle from '@material-ui/core/DialogTitle'
+import CircularProgress from '@material-ui/core/CircularProgress'
 import {TEAL} from '../constants'
 
 class Machine extends React.PureComponent {
@@ -31,17 +32,32 @@ class Machine extends React.PureComponent {
     return (
       <React.Fragment>
         <div className={classes.root} onClick={() => this.handleClick()}>
-          <div>{name}</div>
+          <div className={classes.name}>{name}</div>
+          <div className={classes.circleWrapper}>
+            <CircularProgress
+              className={classes.circleShadow}
+              variant="static"
+              value={100}
+              thickness={9}
+              size={50}
+            />
+            <CircularProgress
+              className={classes.efficiency}
+              variant="static"
+              value={efficiency}
+              thickness={9}
+              size={50}
+            />
+          </div>
           <div>{efficiency}</div>
         </div>
 
         <Dialog
           onClose={() => this.handleClose()}
-          aria-labelledby="simple-dialog-title"
           open={this.state.showDetails}
         >
           <div className={classes.dialog}>
-            <DialogTitle id="simple-dialog-title" className={classes.dialogTitle}>
+            <DialogTitle className={classes.dialogTitle}>
               {name}
             </DialogTitle>
             <div className={classes.dialogContent}>
@@ -72,19 +88,34 @@ const determineEfficiencyColor = ({efficiency}) => {
 
 const styles = {
   root: {
-    width: 100,
-    height: 100,
+    width: 125,
+    height: 125,
     padding: 10,
-    color: props => determineEfficiencyColor({efficiency: props.efficiency}),
+    color: "white",
     backgroundColor: "black",
     border: ["2px", "solid", TEAL],
     borderRadius: 5,
-    margin: 5,
+    margin: 10,
     display: "flex",
     flexDirection: "column",
     textAlign: "center",
-    justifyContent: "center",
+    justifyContent: "space-between",
     cursor: "pointer",
+  },
+  name: {
+    fontSize: 18,
+  },
+  circleWrapper: {
+    position: "relative",
+  },
+  efficiency: {
+    color: props => determineEfficiencyColor({efficiency: props.efficiency}),
+    position: "absolute",
+    left: 38,
+
+  },
+  circleShadow: {
+    color: "#484848",
   },
   dialog: {
     padding: 20,
