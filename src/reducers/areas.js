@@ -3,7 +3,7 @@ import {buildDatasourceFromData} from './utils'
 
 const initialState = {
   groupedByArray: undefined,
-  test: undefined,
+  groupedByIds: undefined,
 }
 
 const areas = (state = initialState, action) => {
@@ -20,10 +20,12 @@ const updatePlantData = ({state, action}) => {
   const instantiatedObjects = action.payload.map(machine => {
     const instaObject = buildDatasourceFromData(machine)
     const {id} = instaObject
-    if (state.test === undefined) {
-      state.test = {id: instaObject}
+
+    if (state.groupedByIds === undefined) {
+      state.groupedByIds = {[id]: instaObject}
+
     } else {
-      const oldMachine = state.test[id]
+      const oldMachine = state.groupedByIds[id]
       if (oldMachine) {
         const mergedObject = {
           ...oldMachine,
@@ -32,21 +34,19 @@ const updatePlantData = ({state, action}) => {
           fault: instaObject.fault,
         }
 
-        state.test[id] = mergedObject
+        state.groupedByIds[id] = mergedObject
       } else {
-        state.test[id] = instaObject
+        state.groupedByIds[id] = instaObject
       }
     }
-
-    console.log(state.test[4])
 
     return instaObject
   })
 
-
+  console.log(state.groupedByIds)
 
   return {
-    groupedByArray: instantiatedObjects
+    groupedByArray: instantiatedObjects,
   }
 }
 
