@@ -9,7 +9,7 @@ class Equipment extends React.PureComponent {
   componentDidMount() {
     const {fetchPlantData} = this.props.actions
 
-    this.timer = setInterval(() => fetchPlantData(), 5000)
+    this.timer = setInterval(() => fetchPlantData(), 10000)
   }
 
   componentWillUnmount() {
