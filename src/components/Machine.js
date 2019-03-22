@@ -49,7 +49,7 @@ class Machine extends React.PureComponent {
             value={efficiency}
             color={this.determineEfficiencyColor({value: efficiency})}
           />
-          <div>{efficiency}</div>
+          <div>{`${efficiency}%`}</div>
         </div>
 
         <Dialog
