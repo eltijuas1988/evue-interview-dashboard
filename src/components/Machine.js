@@ -1,47 +1,99 @@
 import * as React from 'react'
 import injectSheet from 'react-jss'
 import {TEAL} from '../constants'
+import ProgressCircle from './ProgressCircle'
+import Dialog from './Dialog'
 
-const Machine = (props) => {
-  const {classes, id, name, efficiency, fault} = props
+class Machine extends React.PureComponent {
+  constructor(props) {
+    super(props)
 
-  return (
-    <div className={classes.root}>
-      <div>{id}</div>
-      <div>{name}</div>
-      <div>{efficiency}</div>
-      <div>{`${fault}`}</div>
-    </div>
-  )
-}
-
-const determineEfficiencyColor = ({efficiency}) => {
-  let color = "red"
-
-  if (efficiency >= 80) {
-    color = "green"
-
-  } else if (efficiency > 60 && efficiency < 80) {
-    color = "yellow"
+    this.state = {
+      showDetails: false,
+    }
   }
 
-  return color
+  handleClose() {
+    this.setState({
+      showDetails: false,
+    })
+  }
+
+  handleClick() {
+    this.setState({
+      showDetails: true
+    })
+  }
+
+  determineEfficiencyColor({value}) {
+    let color = "red"
+
+    if (value >= 80) {
+      color = "green"
+
+    } else if (value > 60 && value < 80) {
+      color = "yellow"
+    }
+
+    return color
+  }
+
+  render() {
+    const {classes, id, name, efficiency, fault, type} = this.props
+
+    return (
+      <React.Fragment>
+        <div className={classes.root} onClick={() => this.handleClick()}>
+          <div className={classes.name}>{name}</div>
+          <ProgressCircle
+            value={efficiency}
+            color={this.determineEfficiencyColor({value: efficiency})}
+          />
+          <div>{efficiency}</div>
+        </div>
+
+        <Dialog
+          onClose={() => this.handleClose()}
+          open={this.state.showDetails}
+          name={name}
+        >
+          <div className={classes.dialogContent}>
+            <div>{id}</div>
+            <div>{efficiency}</div>
+            <div>{`${fault}`}</div>
+            <div>{type}</div>
+          </div>
+        </Dialog>
+      </React.Fragment>
+    )
+  }
 }
 
 const styles = {
   root: {
-    width: 100,
-    height: 100,
+    width: 125,
+    height: 125,
     padding: 10,
-    color: props => determineEfficiencyColor({efficiency: props.efficiency}),
+    color: "white",
     backgroundColor: "black",
     border: ["2px", "solid", TEAL],
     borderRadius: 5,
-    margin: 5,
+    margin: 10,
     display: "flex",
     flexDirection: "column",
     textAlign: "center",
     justifyContent: "center",
+    cursor: "pointer",
+  },
+  name: {
+    fontSize: 18,
+    marginBottom: 15,
+  },
+  dialogContent: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    textAlign: "center",
   },
 }
 
