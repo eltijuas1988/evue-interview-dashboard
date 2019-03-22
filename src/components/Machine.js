@@ -1,9 +1,8 @@
 import * as React from 'react'
 import injectSheet from 'react-jss'
-import Dialog from '@material-ui/core/Dialog'
-import DialogTitle from '@material-ui/core/DialogTitle'
-import CircularProgress from '@material-ui/core/CircularProgress'
-import {GRAY, TEAL} from '../constants'
+import {Dialog, DialogTitle} from '../material-ui'
+import {TEAL} from '../constants'
+import ProgressCircle from './ProgressCircle'
 
 class Machine extends React.PureComponent {
   constructor(props) {
@@ -33,22 +32,7 @@ class Machine extends React.PureComponent {
       <React.Fragment>
         <div className={classes.root} onClick={() => this.handleClick()}>
           <div className={classes.name}>{name}</div>
-          <div className={classes.circleWrapper}>
-            <CircularProgress
-              className={classes.circleShadow}
-              variant="static"
-              value={100}
-              thickness={9}
-              size={50}
-            />
-            <CircularProgress
-              className={classes.efficiency}
-              variant="static"
-              value={efficiency}
-              thickness={9}
-              size={50}
-            />
-          </div>
+          <ProgressCircle value={efficiency}/>
           <div>{efficiency}</div>
         </div>
 
@@ -73,19 +57,6 @@ class Machine extends React.PureComponent {
   }
 }
 
-const determineEfficiencyColor = ({efficiency}) => {
-  let color = "red"
-
-  if (efficiency >= 80) {
-    color = "green"
-
-  } else if (efficiency > 60 && efficiency < 80) {
-    color = "yellow"
-  }
-
-  return color
-}
-
 const styles = {
   root: {
     width: 125,
@@ -105,18 +76,6 @@ const styles = {
   name: {
     fontSize: 18,
     marginBottom: 15,
-  },
-  circleWrapper: {
-    position: "relative",
-  },
-  efficiency: {
-    color: props => determineEfficiencyColor({efficiency: props.efficiency}),
-    position: "absolute",
-    left: 38,
-
-  },
-  circleShadow: {
-    color: GRAY,
   },
   dialog: {
     padding: 20,
