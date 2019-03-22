@@ -1,8 +1,10 @@
+import produce from 'immer'
 import {UPDATE_PLANT_DATA} from '../actions/actionTypes'
-import {BlanketFolder, Ironer, Machine, Sorter, Washer} from '../models'
+import {buildDatasourceFromData} from './utils'
 
 const initialState = {
-  areas: [],
+  groupedByArray: undefined,
+  groupedByIds: {},
 }
 
 const areas = (state = initialState, action) => {
@@ -15,34 +17,41 @@ const areas = (state = initialState, action) => {
   }
 }
 
-const buildDatasourcesFromData = data => {
-  if (!data) return null
+const updatePlantData = ({state, action}) => {
+  let newState = produce(state, draftState => draftState)
 
-  return data.map(machine => {
-    const {name} = machine
-    if (name.includes("Sorting")) {
-      return new Sorter(machine)
+  action.payload.forEach(machine => {
+    const instaObject = buildDatasourceFromData(machine)
+    const {id} = instaObject
 
-    } else if (name.includes("Washer")) {
-      return new Washer(machine)
+    const previousMachineState = newState.groupedByIds[id]
 
-    } else if (name.includes("Ironer")) {
-      return new Ironer(machine)
+    if (previousMachineState) {
+      const mergedObject = {
+        ...previousMachineState,
+        efficiency: instaObject.efficiency,
+        idle: instaObject.idle,
+        fault: instaObject.fault,
+      }
 
-    } else if (name.includes("Folder")) {
-      return new BlanketFolder(machine)
-
+      newState = produce(newState, draftState => {
+        draftState.groupedByIds[id] = mergedObject
+      })
     } else {
-      return new Machine(machine)
+      newState = produce(newState, draftState => {
+        draftState.groupedByIds[id] = instaObject
+      })
     }
   })
-}
 
-const updatePlantData = ({state, action}) => {
-  const test = buildDatasourcesFromData(action.payload)
-  return {
-    areas: test
-  }
+  newState = produce(newState, draftState => {
+    const arrayFromObject = Object.values(newState.groupedByIds)
+
+    draftState.groupedByArray =
+      arrayFromObject && arrayFromObject.length ? arrayFromObject : []
+  })
+
+  return newState
 }
 
 export default areas

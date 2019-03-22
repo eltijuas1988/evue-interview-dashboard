@@ -28,7 +28,7 @@ class Equipment extends React.PureComponent {
   render() {
     const {children, areas} = this.props
     const props = {
-      machines: areas.areas
+      machines: areas
     }
 
     return (
@@ -40,9 +40,11 @@ class Equipment extends React.PureComponent {
 }
 
 const mapStateToProps = state => {
-  const {areas} = state
+  const {groupedByArray} = state.areas
 
-  return {areas}
+  return {
+    areas: groupedByArray,
+  }
 }
 
 const mapDispatchToProps = dispatch => {
