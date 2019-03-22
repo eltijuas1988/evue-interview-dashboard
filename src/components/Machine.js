@@ -1,8 +1,8 @@
 import * as React from 'react'
 import injectSheet from 'react-jss'
-import {Dialog, DialogTitle} from '../material-ui'
 import {TEAL} from '../constants'
 import ProgressCircle from './ProgressCircle'
+import Dialog from './Dialog'
 
 class Machine extends React.PureComponent {
   constructor(props) {
@@ -55,17 +55,13 @@ class Machine extends React.PureComponent {
         <Dialog
           onClose={() => this.handleClose()}
           open={this.state.showDetails}
+          name={name}
         >
-          <div className={classes.dialog}>
-            <DialogTitle className={classes.dialogTitle}>
-              {name}
-            </DialogTitle>
-            <div className={classes.dialogContent}>
-              <div>{id}</div>
-              <div>{efficiency}</div>
-              <div>{`${fault}`}</div>
-              <div>{type}</div>
-            </div>
+          <div className={classes.dialogContent}>
+            <div>{id}</div>
+            <div>{efficiency}</div>
+            <div>{`${fault}`}</div>
+            <div>{type}</div>
           </div>
         </Dialog>
       </React.Fragment>
@@ -92,12 +88,6 @@ const styles = {
   name: {
     fontSize: 18,
     marginBottom: 15,
-  },
-  dialog: {
-    padding: 20,
-  },
-  dialogTitle: {
-    padding: 0,
   },
   dialogContent: {
     display: "flex",
