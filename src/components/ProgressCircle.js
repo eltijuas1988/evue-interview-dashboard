@@ -28,11 +28,13 @@ const ProgressCircle = (props) => {
 const styles = {
   root: {
     position: "relative",
+    alignSelf: "center",
+    width: 50,
   },
   efficiency: {
     color: props => props.color,
     position: "absolute",
-    left: 38,
+    left: 0,
 
   },
   circleShadow: {
