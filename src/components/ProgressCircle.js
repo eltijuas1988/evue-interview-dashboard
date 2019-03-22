@@ -3,19 +3,20 @@ import injectSheet from 'react-jss'
 import {CircularProgress} from '../material-ui'
 import {GRAY} from '../constants'
 
-const ProgressCircle = ({classes, value}) => {
+const ProgressCircle = (props) => {
+  const {classes, value, variant="static"} = props
   return (
     <div className={classes.root}>
       <CircularProgress
         className={classes.circleShadow}
-        variant="static"
+        variant={variant}
         value={100}
         thickness={9}
         size={50}
       />
       <CircularProgress
         className={classes.efficiency}
-        variant="static"
+        variant={variant}
         value={value}
         thickness={9}
         size={50}
