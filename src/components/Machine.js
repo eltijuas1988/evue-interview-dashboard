@@ -1,6 +1,6 @@
 import * as React from 'react'
 import injectSheet from 'react-jss'
-import {TEAL} from '../constants'
+import {GRAY, TEAL} from '../constants'
 import ProgressCircle from './ProgressCircle'
 import Dialog from './Dialog'
 
@@ -39,7 +39,8 @@ class Machine extends React.PureComponent {
   }
 
   render() {
-    const {classes, id, name, efficiency, fault, type} = this.props
+    const {classes, id, name, fault, idle} = this.props
+    const efficiency = idle ? 0 : this.props.efficiency
 
     return (
       <React.Fragment>
@@ -55,13 +56,14 @@ class Machine extends React.PureComponent {
         <Dialog
           onClose={() => this.handleClose()}
           open={this.state.showDetails}
-          name={name}
+
         >
           <div className={classes.dialogContent}>
-            <div>{id}</div>
-            <div>{efficiency}</div>
-            <div>{`${fault}`}</div>
-            <div>{type}</div>
+            <div className={classes.name}>{name}</div>
+            <div>ID: {id}</div>
+            <div>Efficiency: {efficiency}</div>
+            <div>Faulty: {`${fault}`}</div>
+            <div>Idle: {`${idle}`}</div>
           </div>
         </Dialog>
       </React.Fragment>
@@ -76,7 +78,7 @@ const styles = {
     padding: 10,
     color: "white",
     backgroundColor: "black",
-    border: ["2px", "solid", TEAL],
+    border: props => `2px solid ${props.idle ? GRAY : TEAL}`,
     borderRadius: 5,
     margin: 10,
     display: "flex",
