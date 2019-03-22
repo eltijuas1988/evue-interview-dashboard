@@ -2,7 +2,8 @@ import {UPDATE_PLANT_DATA} from '../actions/actionTypes'
 import {buildDatasourceFromData} from './utils'
 
 const initialState = {
-  areas: [],
+  groupedByArray: undefined,
+  test: undefined,
 }
 
 const areas = (state = initialState, action) => {
@@ -17,11 +18,35 @@ const areas = (state = initialState, action) => {
 
 const updatePlantData = ({state, action}) => {
   const instantiatedObjects = action.payload.map(machine => {
-    return buildDatasourceFromData(machine)
+    const instaObject = buildDatasourceFromData(machine)
+    const {id} = instaObject
+    if (state.test === undefined) {
+      state.test = {id: instaObject}
+    } else {
+      const oldMachine = state.test[id]
+      if (oldMachine) {
+        const mergedObject = {
+          ...oldMachine,
+          efficiency: instaObject.efficiency,
+          idle: instaObject.idle,
+          fault: instaObject.fault,
+        }
+
+        state.test[id] = mergedObject
+      } else {
+        state.test[id] = instaObject
+      }
+    }
+
+    console.log(state.test[4])
+
+    return instaObject
   })
 
+
+
   return {
-    areas: instantiatedObjects
+    groupedByArray: instantiatedObjects
   }
 }
 
