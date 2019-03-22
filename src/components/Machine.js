@@ -3,7 +3,7 @@ import injectSheet from 'react-jss'
 import Dialog from '@material-ui/core/Dialog'
 import DialogTitle from '@material-ui/core/DialogTitle'
 import CircularProgress from '@material-ui/core/CircularProgress'
-import {TEAL} from '../constants'
+import {GRAY, TEAL} from '../constants'
 
 class Machine extends React.PureComponent {
   constructor(props) {
@@ -99,11 +99,12 @@ const styles = {
     display: "flex",
     flexDirection: "column",
     textAlign: "center",
-    justifyContent: "space-between",
+    justifyContent: "center",
     cursor: "pointer",
   },
   name: {
     fontSize: 18,
+    marginBottom: 15,
   },
   circleWrapper: {
     position: "relative",
@@ -115,7 +116,7 @@ const styles = {
 
   },
   circleShadow: {
-    color: "#484848",
+    color: GRAY,
   },
   dialog: {
     padding: 20,
