@@ -1,9 +1,6 @@
 import * as React from 'react'
 import injectSheet from 'react-jss'
-import {
-  Dialog as MUIDialog,
-  DialogTitle as MUIDialogTitle
-} from '../material-ui'
+import {Dialog as MUIDialog} from '../material-ui'
 
 class Dialog extends React.PureComponent {
   handleClose() {
@@ -11,15 +8,11 @@ class Dialog extends React.PureComponent {
   }
 
   render() {
-    const {classes, open, name, children} = this.props
+    const {classes, open, children} = this.props
 
     return (
       <MUIDialog onClose={() => this.handleClose()} open={open}>
         <div className={classes.dialog}>
-          <MUIDialogTitle className={classes.dialogTitle}>
-            {name}
-          </MUIDialogTitle>
-
           {children}
         </div>
       </MUIDialog>
@@ -30,9 +23,6 @@ class Dialog extends React.PureComponent {
 const styles = {
   dialog: {
     padding: 20,
-  },
-  dialogTitle: {
-    padding: 0,
   },
 }
 
