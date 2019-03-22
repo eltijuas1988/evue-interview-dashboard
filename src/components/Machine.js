@@ -25,6 +25,19 @@ class Machine extends React.PureComponent {
     })
   }
 
+  determineEfficiencyColor({value}) {
+    let color = "red"
+
+    if (value >= 80) {
+      color = "green"
+
+    } else if (value > 60 && value < 80) {
+      color = "yellow"
+    }
+
+    return color
+  }
+
   render() {
     const {classes, id, name, efficiency, fault, type} = this.props
 
@@ -32,7 +45,10 @@ class Machine extends React.PureComponent {
       <React.Fragment>
         <div className={classes.root} onClick={() => this.handleClick()}>
           <div className={classes.name}>{name}</div>
-          <ProgressCircle value={efficiency}/>
+          <ProgressCircle
+            value={efficiency}
+            color={this.determineEfficiencyColor({value: efficiency})}
+          />
           <div>{efficiency}</div>
         </div>
 

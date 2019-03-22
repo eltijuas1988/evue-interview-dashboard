@@ -24,25 +24,12 @@ const ProgressCircle = ({classes, value}) => {
   )
 }
 
-const determineEfficiencyColor = ({value}) => {
-  let color = "red"
-
-  if (value >= 80) {
-    color = "green"
-
-  } else if (value > 60 && value < 80) {
-    color = "yellow"
-  }
-
-  return color
-}
-
 const styles = {
   root: {
     position: "relative",
   },
   efficiency: {
-    color: props => determineEfficiencyColor({value: props.value}),
+    color: props => props.color,
     position: "absolute",
     left: 38,
 
