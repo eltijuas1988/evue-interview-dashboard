@@ -1,7 +1,7 @@
 import React from 'react'
 import injectSheet from 'react-jss'
-import {Header, Dashboard} from './components'
-import {DARK_PURPLE} from './constants'
+import {Header, Dashboard} from '../'
+import {DARK_PURPLE} from '../../constants'
 
 const App = ({classes}) => {
   return (

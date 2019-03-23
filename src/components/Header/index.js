@@ -1,7 +1,7 @@
 import * as React from 'react'
 import injectSheet from 'react-jss'
-import logo from '../logo.png'
-import {TEAL} from '../constants'
+import logo from './logo.png'
+import {TEAL} from '../../constants'
 
 const Header = ({classes}) => {
   return (
