@@ -12,6 +12,9 @@ export function fetchPlantData() {
     fetch("http://demo.etechsystems.com/interview_problem_data.json")
       .then(res => res.json())
       .then(response => dispatch(updatePlantData({data: response.areas})))
-      .catch(error => console.log(error))
+      .catch(error => {
+        dispatch(updatePlantData({data: []}))
+        console.log(error)
+      })
   }
 }
