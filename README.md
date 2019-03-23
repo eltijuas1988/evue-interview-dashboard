@@ -4,7 +4,7 @@ Hello and thanks for your time. The application is a simple React app that is de
 
 ## Getting Started
 
-clone the repo and then once you 'cd' into repo run the following:
+Clone the repo and then once you 'cd' into repo run the following:
 
 yarn && yarn start
 
