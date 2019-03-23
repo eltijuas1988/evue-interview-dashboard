@@ -20,4 +20,6 @@ If you would like to see the application running without having to run any of th
 
 https://evuecontrol-l2y569v1g.now.sh/
 
-Insecure Content Blocked Warning: If the application dashboard returns 'No Data Available' in red, you may have a 'Insecure Content Blocked Warning'. If you get this warning, be sure to enable 'load unsafe scripts' from your browser. This warning is due to the application running on HTTPS and the resource for the API running on HTTP.
+## Insecure Content Blocked Warning
+
+If the application dashboard returns 'No Data Available' in red, you may have a 'Insecure Content Blocked Warning'. If you get this warning, be sure to enable 'load unsafe scripts' from your browser. This warning is due to the application running on HTTPS and the resource for the API running on HTTP.
