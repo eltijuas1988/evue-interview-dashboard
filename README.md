@@ -10,7 +10,7 @@ https://github.com/eltijuas1988/evue-interview-dashboard
 
 clone the repo and then once you 'cd' into repo:
 
-yarn&&yarn start
+yarn && yarn start
 
 for running the application.
 
