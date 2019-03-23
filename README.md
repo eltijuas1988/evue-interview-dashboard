@@ -4,10 +4,6 @@ Hello and thanks for your time. The application is a simple React app that is de
 
 ## Getting Started
 
-To get started simply go to:
-
-https://github.com/eltijuas1988/evue-interview-dashboard
-
 clone the repo and then once you 'cd' into repo run the following:
 
 yarn && yarn start
