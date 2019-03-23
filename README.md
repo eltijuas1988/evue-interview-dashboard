@@ -18,6 +18,6 @@ for running the application.
 
 If you would like to see the application running without having to run any of the steps above, go to:
 
-https://evuecontrol-689ureg1b.now.sh/
+https://evuecontrol-l2y569v1g.now.sh/
 
 Insecure Content Blocked Warning: If you get this warning, be sure to enable 'load unsafe scripts' from your browser. This warning is due to the application running on HTTPS and the resource for the API running on HTTP.
