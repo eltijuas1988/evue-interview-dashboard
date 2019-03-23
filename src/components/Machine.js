@@ -28,11 +28,11 @@ class Machine extends React.PureComponent {
   determineEfficiencyColor({value}) {
     let color = "red"
 
-    if (value >= 80) {
-      color = "green"
-
-    } else if (value > 60 && value < 80) {
+    if (value > 60 && value < 80) {
       color = "yellow"
+
+    } else if (value >= 80) {
+      color = "green"
     }
 
     return color
@@ -41,26 +41,21 @@ class Machine extends React.PureComponent {
   render() {
     const {classes, id, name, fault, idle} = this.props
     const efficiency = idle ? 0 : this.props.efficiency
+    const color = this.determineEfficiencyColor({value: efficiency})
+    const {showDetails} = this.state
 
     return (
       <React.Fragment>
         <div className={classes.root} onClick={() => this.handleClick()}>
           <div className={classes.name}>{name}</div>
-          <ProgressCircle
-            value={efficiency}
-            color={this.determineEfficiencyColor({value: efficiency})}
-          />
+          <ProgressCircle value={efficiency} color={color}/>
           <div>{`${efficiency}%`}</div>
         </div>
 
-        <Dialog
-          onClose={() => this.handleClose()}
-          open={this.state.showDetails}
-
-        >
+        <Dialog onClose={() => this.handleClose()} open={showDetails}>
           <div className={classes.dialogContent}>
             <div className={classes.name}>{name}</div>
-            <div>ID: {id}</div>
+            <div>Id: {id}</div>
             <div>Efficiency: {efficiency}</div>
             <div>Faulty: {`${fault}`}</div>
             <div>Idle: {`${idle}`}</div>

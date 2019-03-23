@@ -5,6 +5,7 @@ import {GRAY} from '../constants'
 
 const ProgressCircle = (props) => {
   const {classes, value, variant="static"} = props
+
   return (
     <div className={classes.root}>
       <CircularProgress

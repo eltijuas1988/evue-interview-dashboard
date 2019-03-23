@@ -1,6 +1,6 @@
 import {BlanketFolder, Ironer, Machine, Sorter, Washer} from '../models'
 
-export const buildDatasourceFromData = data => {
+export const buildMachineFromModel = data => {
   if (!data) return null
 
   const {name} = data

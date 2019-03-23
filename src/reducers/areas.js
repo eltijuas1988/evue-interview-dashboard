@@ -1,6 +1,6 @@
 import produce from 'immer'
 import {UPDATE_PLANT_DATA} from '../actions/actionTypes'
-import {buildDatasourceFromData} from './utils'
+import {buildMachineFromModel} from './utils'
 
 const initialState = {
   groupedByArray: undefined,
@@ -19,19 +19,21 @@ const areas = (state = initialState, action) => {
 
 const updatePlantData = ({state, action}) => {
   let newState = produce(state, draftState => draftState)
+  const allMachines = action.payload
 
-  action.payload.forEach(machine => {
-    const instaObject = buildDatasourceFromData(machine)
-    const {id} = instaObject
-
+  allMachines.forEach(machine => {
+    const newMachine = buildMachineFromModel(machine)
+    const {id} = newMachine
     const previousMachineState = newState.groupedByIds[id]
 
     if (previousMachineState) {
+      const {efficiency, idle, fault} = newMachine
+
       const mergedObject = {
         ...previousMachineState,
-        efficiency: instaObject.efficiency,
-        idle: instaObject.idle,
-        fault: instaObject.fault,
+        efficiency,
+        idle,
+        fault,
       }
 
       newState = produce(newState, draftState => {
@@ -39,14 +41,14 @@ const updatePlantData = ({state, action}) => {
       })
     } else {
       newState = produce(newState, draftState => {
-        draftState.groupedByIds[id] = instaObject
+        draftState.groupedByIds[id] = newMachine
       })
     }
   })
 
-  newState = produce(newState, draftState => {
-    const arrayFromObject = Object.values(newState.groupedByIds)
+  const arrayFromObject = Object.values(newState.groupedByIds)
 
+  newState = produce(newState, draftState => {
     draftState.groupedByArray =
       arrayFromObject && arrayFromObject.length ? arrayFromObject : []
   })

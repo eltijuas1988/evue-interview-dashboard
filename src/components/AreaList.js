@@ -4,29 +4,34 @@ import {TEAL} from '../constants'
 import {CircularProgress} from '../material-ui'
 import Machine from './Machine'
 
-const AreaList = ({classes, title, machines, type}) => {
-  let rendered
-  if (machines === undefined) {
-    rendered =
-      <div className={classes.progressWrapper}><CircularProgress/></div>
-
-  } else if (machines && machines.length < 1) {
-    rendered = <div className={classes.noDataText}>No Data Available</div>
-
-  } else {
-    rendered = machines.filter(m => m.type === type).map(machine => {
-      return <Machine key={machine.id} {...machine}/>
-    })
-  }
+const AreaList = (props) => {
+  const {classes, title} = props
+  const renderedComponent = determineComponentToRender(props)
 
   return (
     <div className={classes.root}>
       <div className={classes.title}>{title}</div>
       <div className={classes.area}>
-        {rendered}
+        {renderedComponent}
       </div>
     </div>
   )
+}
+
+const determineComponentToRender = (props) => {
+  const {classes, machines, type} = props
+
+  if (machines === undefined) {
+    return <div className={classes.progressWrapper}><CircularProgress/></div>
+
+  } else if (machines && machines.length < 1) {
+    return <div className={classes.noDataText}>No Data Available</div>
+
+  } else {
+    return machines.filter(m => m.type === type).map(machine => {
+      return <Machine key={machine.id} {...machine}/>
+    })
+  }
 }
 
 const styles = {

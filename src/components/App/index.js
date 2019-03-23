@@ -1,16 +1,22 @@
 import React from 'react'
 import injectSheet from 'react-jss'
+import {Provider} from 'react-redux'
 import {Header, Dashboard} from '../'
 import {DARK_PURPLE} from '../../constants'
+import configureStore from '../../store'
+
+const store = configureStore()
 
 const App = ({classes}) => {
   return (
-    <div className={classes.root}>
-      <Header/>
-      <div className={classes.dashboard}>
-        <Dashboard/>
+    <Provider store={store}>
+      <div className={classes.root}>
+        <Header/>
+        <div className={classes.dashboard}>
+          <Dashboard/>
+        </div>
       </div>
-    </div>
+    </Provider>
   )
 }
 

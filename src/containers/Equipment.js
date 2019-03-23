@@ -14,28 +14,25 @@ class Equipment extends React.PureComponent {
 
   componentWillUnmount() {
     clearInterval(this.timer)
+
     this.timer = null
   }
 
   storeData({data}) {
-    if (data) {
-      const {updatePlantData} = this.props.actions
+    if (!data) return null
+    const {updatePlantData} = this.props.actions
 
-      updatePlantData({data})
-    }
+    updatePlantData({data})
   }
 
   render() {
-    const {children, areas} = this.props
+    const {children, areas, other} = this.props
     const props = {
+      ...other,
       machines: areas
     }
 
-    return (
-      <React.Fragment>
-        {renderChildrenWithProps({children, props})}
-      </React.Fragment>
-    )
+    return renderChildrenWithProps({children, props})
   }
 }
 
