@@ -1,8 +1,8 @@
-##eVue Control Interview Project
+# eVue Control Interview Project
 
 Hello and thanks for your time. The application is a simple React app that is deployed to ZEIT and it uses Redux with Immer.js(Creates Immutable objects) for the cache and Material-UI for custom components. JSS is used for component styling and Yarn for package management.
 
-##Get Started
+## Getting Started
 
 To get started simply go to:
 
@@ -14,7 +14,7 @@ yarn&&yarn start
 
 for running the application.
 
-##Deployed Application
+## Deployment
 
 If you would like to see the application running without having to run any of the steps above, go to:
 
