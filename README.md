@@ -14,7 +14,7 @@ That is it!!
 
 If you would like to see the application running without having to run any of the steps above, go to:
 
-https://evuecontrol-l2y569v1g.now.sh/
+https://evuecontrol-dr44cvg4f.now.sh/
 
 ## Insecure Content Blocked Warning
 
